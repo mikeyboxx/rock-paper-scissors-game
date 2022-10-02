@@ -14,7 +14,7 @@ RPS.prototype.play = function() {
 }
 
 RPS.prototype.newGame = function() {
-  this.games.push(new Game(this.player1, this.player2, (this.games.length - 1)));
+  this.games.push(new Game(this.player1, this.player2));
   console.log(`${this.player1.name} vs. ${this.player2.name}`)
   this.games[this.games.length - 1].playRounds();
   if (confirm('Do you want to play again?')) {
@@ -51,7 +51,7 @@ Number of rounds played: ${scores.rounds}`);
 
 // --------------------- Game Object -----------------------
 // Game object that accepts nbr of rounds each game should be
-function Game(player1, player2, gameNbr){
+function Game(player1, player2){
   var nbrOfRounds = parseInt(prompt('Please enter number of rounds'));
   while (nbrOfRounds !== nbrOfRounds)   // check for NaN parseint will return NaN if not numeric
     nbrOfRounds = parseInt(prompt(`Invalid Input!  Try Again!
@@ -61,7 +61,6 @@ Please enter number of rounds`));
   this.rounds = [];                   // array of Round objects
   this.winner = null;                 // 0 is player1, 1 is player2, -1 is a tie
   this.maxNbrOfRounds = nbrOfRounds;            // maximim number of rounds in the game
-  this.gameNbr = 0;
 }
 
 // adds Round object to the rounds array
