@@ -1,7 +1,7 @@
 // --------------------- RPS Object ------------------------
 function RPS() {
-  this.player1 = null
-  this.player2 = null
+  this.player1 = undefined
+  this.player2 = undefined
   this.games = []
 }
 
@@ -15,7 +15,6 @@ RPS.prototype.play = function() {
 
 RPS.prototype.newGame = function() {
   this.games.push(new Game(this.player1, this.player2));
-  console.log(`${this.player1.name} vs. ${this.player2.name}`)
   this.games[this.games.length - 1].playRounds();
   if (confirm('Do you want to play again?')) {
     return this.newGame();
@@ -29,7 +28,6 @@ RPS.prototype.newGame = function() {
 
   this.games.forEach(game => {
     game.rounds.forEach(round => {
-      console.log(round.winner)
       scores[round.winner]++;
       scores.rounds++
     })
@@ -67,7 +65,6 @@ Please enter number of rounds`));
 Game.prototype.addRound = function (round){
   var round = new Round(this.player1.draw(), this.player2.draw(), this);
   this.rounds.push(round);
-  console.log("Round:", round)
 }
 
 // determine who the game's winner is 0 is player1, 1 is player 2, -1 is a tie
@@ -90,7 +87,6 @@ There were ${ties} ties
 
 ${(this.winner === "tie")?"It's a tie!":`Player ${playerOneWins > playerTwoWins ? this.player1.name : this.player2.name} is the WINNER!`}`); 
 }
-
 
 Game.prototype.playRounds = function () {
   while (this.rounds.length < this.maxNbrOfRounds) {
@@ -171,6 +167,5 @@ JSON.safeStringify = (obj, indent = 2) => {
   cache = null;
   return retVal;
 };
-
 
 console.log(JSON.safeStringify(rps, 2));
